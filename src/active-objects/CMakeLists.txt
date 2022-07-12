@@ -7,6 +7,7 @@
 set(LIB_NAME ${CMAKE_PROJECT_NAME})
 
 add_library(${LIB_NAME} INTERFACE
+    utils/SinglyLinkedList.h
     utils/DoublyLinkedList.h
 )
 target_include_directories(${LIB_NAME} INTERFACE
@@ -16,6 +17,7 @@ target_include_directories(${LIB_NAME} INTERFACE
 
 # Unit Tests
 add_unit_test(TARGET unittest-${LIB_NAME}
+    utils/SinglyLinkedList.test.cpp
     utils/DoublyLinkedList.test.cpp
 )
 target_compile_features(unittest-${LIB_NAME} PRIVATE ${ACTIVE_OBJECTS_CXX_STANDARD})

@@ -9,6 +9,8 @@ set(LIB_NAME ${CMAKE_PROJECT_NAME})
 add_library(${LIB_NAME} INTERFACE
     detail/SinglyLinkedList.h
     detail/DoublyLinkedList.h
+    Event.h
+    EventQueue.h
 )
 target_include_directories(${LIB_NAME} INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
@@ -19,5 +21,6 @@ target_include_directories(${LIB_NAME} INTERFACE
 add_unit_test(TARGET unittest-${LIB_NAME}
     detail/SinglyLinkedList.test.cpp
     detail/DoublyLinkedList.test.cpp
+    EventQueue.test.cpp
 )
 target_compile_features(unittest-${LIB_NAME} PRIVATE ${TAOF_CXX_STANDARD})

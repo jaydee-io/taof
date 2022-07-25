@@ -1,11 +1,11 @@
 ////////////////////////////////////////////////////////////////////////////////
-//                                ActiveObjects
+//                          The Active Object Framework
 //
 // This file is distributed under the 3-clause Berkeley Software Distribution
 // License. See LICENSE for details.
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef ACTIVE_OBJECTS_UTILS_DOUBLY_LINKED_LIST_H
-#define ACTIVE_OBJECTS_UTILS_DOUBLY_LINKED_LIST_H
+#ifndef TAOF_UTILS_DOUBLY_LINKED_LIST_H
+#define TAOF_UTILS_DOUBLY_LINKED_LIST_H
 #include <compare>
 
 namespace utils {
@@ -192,4 +192,4 @@ DoublyLinkedListIterator<T> rend(DoublyLinkedList<T> & list) { return list.rend(
 
 }; // namespace utils
 
-#endif /* ACTIVE_OBJECTS_UTILS_DOUBLY_LINKED_LIST_H */
+#endif /* TAOF_UTILS_DOUBLY_LINKED_LIST_H */

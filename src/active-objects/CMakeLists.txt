@@ -1,5 +1,5 @@
 ################################################################################
-##                                ActiveObjects
+##                          The Active Object Framework
 ##
 ## This file is distributed under the 3-clause Berkeley Software Distribution
 ## License. See LICENSE for details.
@@ -20,4 +20,4 @@ add_unit_test(TARGET unittest-${LIB_NAME}
     utils/SinglyLinkedList.test.cpp
     utils/DoublyLinkedList.test.cpp
 )
-target_compile_features(unittest-${LIB_NAME} PRIVATE ${ACTIVE_OBJECTS_CXX_STANDARD})
+target_compile_features(unittest-${LIB_NAME} PRIVATE ${TAOF_CXX_STANDARD})

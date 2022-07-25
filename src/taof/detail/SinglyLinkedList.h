@@ -4,11 +4,11 @@
 // This file is distributed under the 3-clause Berkeley Software Distribution
 // License. See LICENSE for details.
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef TAOF_UTILS_SINGLY_LINKED_LIST_H
-#define TAOF_UTILS_SINGLY_LINKED_LIST_H
+#ifndef TAOF_DETAIL_SINGLY_LINKED_LIST_H
+#define TAOF_DETAIL_SINGLY_LINKED_LIST_H
 #include <compare>
 
-namespace utils {
+namespace taof::detail {
 
 /*************************************************
  * Singly linked list node
@@ -123,6 +123,6 @@ SinglyLinkedListIterator<T> begin(SinglyLinkedList<T> & list) { return list.begi
 template<typename T>
 SinglyLinkedListIterator<T> end(SinglyLinkedList<T> & list) { return list.end(); }
 
-}; // namespace utils
+}; /* namespace taof::detail */
 
-#endif /* TAOF_UTILS_SINGLY_LINKED_LIST_H */
+#endif /* TAOF_DETAIL_SINGLY_LINKED_LIST_H */

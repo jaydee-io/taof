@@ -3,7 +3,7 @@
 
 #include <array>
 
-using namespace utils;
+using namespace taof::detail;
 
 struct Elem : public SinglyLinkedNode
 {

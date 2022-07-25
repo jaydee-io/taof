@@ -4,11 +4,11 @@
 // This file is distributed under the 3-clause Berkeley Software Distribution
 // License. See LICENSE for details.
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef TAOF_UTILS_DOUBLY_LINKED_LIST_H
-#define TAOF_UTILS_DOUBLY_LINKED_LIST_H
+#ifndef TAOF_DETAIL_DOUBLY_LINKED_LIST_H
+#define TAOF_DETAIL_DOUBLY_LINKED_LIST_H
 #include <compare>
 
-namespace utils {
+namespace taof::detail {
 
 /*************************************************
  * Doubly linked list node
@@ -190,6 +190,6 @@ DoublyLinkedListIterator<T> end(DoublyLinkedList<T> & list) { return list.end();
 template<typename T>
 DoublyLinkedListIterator<T> rend(DoublyLinkedList<T> & list) { return list.rend(); }
 
-}; // namespace utils
+}; /* namespace taof::detail */
 
-#endif /* TAOF_UTILS_DOUBLY_LINKED_LIST_H */
+#endif /* TAOF_DETAIL_DOUBLY_LINKED_LIST_H */

@@ -16,5 +16,4 @@ include(CodeCoverage)
 enable_unit_test(GOOGLETEST_VERSION main)
 enable_code_coverage()
 
-include_directories(src)
-add_subdirectory(src/active-objects)
+add_subdirectory(src/taof)

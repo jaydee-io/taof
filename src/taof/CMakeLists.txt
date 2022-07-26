@@ -16,6 +16,7 @@ target_include_directories(${LIB_NAME} INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:src>
 )
+target_link_libraries(${LIB_NAME} INTERFACE ${TAOF_PORT_TARGET})
 
 # Unit Tests
 add_unit_test(TARGET unittest-${LIB_NAME}

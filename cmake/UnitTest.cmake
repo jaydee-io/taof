@@ -70,3 +70,8 @@ function(add_unit_test)
         target_code_coverage(${ADD_UNIT_TEST_TARGET} EXCLUDE ${ADD_UNIT_TEST_UNPARSED_ARGUMENTS})
     endif()
 endfunction()
+
+function(target_link_unit_test)
+    cmake_parse_arguments(TARGET_LINK_UNIT_TEST "" "TARGET" "" ${ARGN})
+    target_link_libraries(${TARGET_LINK_UNIT_TEST_TARGET} PRIVATE ${UNIT_TESTS_LIBS})
+endfunction()

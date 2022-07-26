@@ -8,3 +8,4 @@
 add_library(${TAOF_PORT_TARGET} ${TAOF_BUILD_TYPE}
 )
 target_compile_features(${TAOF_PORT_TARGET} PRIVATE ${TAOF_CXX_STANDARD})
+target_link_unit_test(TARGET ${TAOF_PORT_TARGET})

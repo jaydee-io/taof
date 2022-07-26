@@ -12,6 +12,7 @@ add_library(${LIB_NAME} INTERFACE
     Event.h
     EventQueue.h
 )
+target_compile_features(${LIB_NAME} INTERFACE ${TAOF_CXX_STANDARD})
 target_include_directories(${LIB_NAME} INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:src>
@@ -24,4 +25,4 @@ add_unit_test(TARGET unittest-${LIB_NAME}
     detail/DoublyLinkedList.test.cpp
     EventQueue.test.cpp
 )
-target_compile_features(unittest-${LIB_NAME} PRIVATE ${TAOF_CXX_STANDARD})
+target_link_libraries(unittest-${LIB_NAME} PUBLIC ${LIB_NAME})

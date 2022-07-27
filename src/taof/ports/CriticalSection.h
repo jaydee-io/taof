@@ -15,7 +15,7 @@ namespace taof::ports {
 class CriticalSection
 {
 public:
-    virtual ~CriticalSection(void) {}
+    virtual ~CriticalSection(void) = default;
 
     virtual void lock(void) = 0;
     virtual void unlock(void) = 0;

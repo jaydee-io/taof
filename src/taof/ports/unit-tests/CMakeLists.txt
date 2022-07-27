@@ -13,5 +13,5 @@ add_library(${TAOF_PORT_TARGET} ${TAOF_BUILD_TYPE}
     MockCriticalSection.cpp
 )
 target_compile_features(${TAOF_PORT_TARGET} PRIVATE ${TAOF_CXX_STANDARD})
-target_include_directories(${TAOF_PORT_TARGET} PRIVATE ..)
+target_include_directories(${TAOF_PORT_TARGET} PUBLIC . ..)
 target_link_unit_test(TARGET ${TAOF_PORT_TARGET})

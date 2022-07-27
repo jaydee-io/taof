@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "EventQueue.h"
+#include "MockCriticalSection.h"
 
 using namespace taof;
 
@@ -63,4 +64,42 @@ TEST(EventQueue, PushSeveralEvents)
 
     tmpEvent = queue.pop();
     ASSERT_EQ(tmpEvent, &event3);
+}
+
+TEST(EventQueue, CriticalSection)
+{
+    ::testing::InSequence seq;
+
+    MockCriticalSection::setFailureOnUnexpectedCallMock();
+
+    std::array<Event *, 3> eventBuffer;
+    EventQueue<3> queue(eventBuffer);
+
+    Event event1;
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), lock());
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), unlock());
+    queue.push(&event1);
+
+    Event event2;
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), lock());
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), unlock());
+    queue.push(&event2);
+
+    Event event3;
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), lock());
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), unlock());
+    queue.push(&event3);
+
+    Event * tmpEvent = nullptr;
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), lock());
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), unlock());
+    tmpEvent = queue.pop();
+
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), lock());
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), unlock());
+    tmpEvent = queue.pop();
+
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), lock());
+    EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), unlock());
+    tmpEvent = queue.pop();
 }

@@ -7,6 +7,7 @@
 #ifndef TAOF_EVENT_QUEUE_H
 #define TAOF_EVENT_QUEUE_H
 #include "Event.h"
+#include "ports/CriticalSection.h"
 
 #include <span>
 
@@ -34,7 +35,8 @@ public:
 
     void push(Event * event)
     {
-        // TODO : LOCK
+        ports::ScopedCriticalSection criticalSection(ports::CriticalSection::globalInstance());
+
         event->incrementReferenceCount();   /* An event is referenced when it's added to a queue */
 
         if(isEmpty())                       /* Queue is empty => insert into optimized pointer */
@@ -55,13 +57,11 @@ public:
             if(nMin > nFree)
                 nMin = nFree;               /* Update statistics */
         }
-
-        // TODO : UNLOCK
     }
 
     Event * pop(void)
     {
-        // TODO : LOCK
+        ports::ScopedCriticalSection criticalSection(ports::CriticalSection::globalInstance());
 
         // TODO : Wait for the queue to be not empty
 
@@ -83,7 +83,6 @@ public:
             // TODO : Notify empty queue
         }
 
-        // TODO : UNLOCK
         return event;
     }
 

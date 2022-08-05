@@ -15,3 +15,5 @@ set_property(CACHE TAOF_BUILD_TYPE PROPERTY STRINGS STATIC;SHARED)
 # Internals options
 set(TAOF_CXX_STANDARD         "cxx_std_20"     CACHE INTERNAL "CXX Standard used to build The Active Object Framework")
 set(TAOF_PORTS_BASE_DIRECTORY "src/taof/ports" CACHE INTERNAL "Base directory containing all ports")
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

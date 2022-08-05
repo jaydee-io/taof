@@ -5,23 +5,23 @@
 
 using namespace taof::detail;
 
-struct Elem : public SinglyLinkedNode
+struct SElem : public SinglyLinkedNode
 {
-    Elem(int data) : data(data) {}
+    SElem(int data) : data(data) {}
 
-    constexpr auto operator <=>(const Elem &) const = default;
+    constexpr auto operator <=>(const SElem &) const = default;
 
     int data = 5;
 };
 
 TEST(SinglyLinkedList, List_Construct)
 {
-    SinglyLinkedList<Elem> emptyList;
+    SinglyLinkedList<SElem> emptyList;
 
     ASSERT_TRUE(emptyList.isEmpty());
 
-    Elem elem = 10;
-    SinglyLinkedList<Elem> notEmptyList(elem);
+    SElem elem = 10;
+    SinglyLinkedList<SElem> notEmptyList(elem);
 
     ASSERT_FALSE(notEmptyList.isEmpty());
     ASSERT_EQ(notEmptyList.head().data, 10);
@@ -29,9 +29,9 @@ TEST(SinglyLinkedList, List_Construct)
 
 TEST(SinglyLinkedList, List_PushHead)
 {
-    SinglyLinkedList<Elem> list;
+    SinglyLinkedList<SElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<SElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
     {
@@ -43,9 +43,9 @@ TEST(SinglyLinkedList, List_PushHead)
 
 TEST(SinglyLinkedList, List_PopHead)
 {
-    SinglyLinkedList<Elem> list;
+    SinglyLinkedList<SElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<SElem, 5> elems = ELEM_VALUES;
 
     for(auto it = std::rbegin(elems); it != std::rend(elems); ++it)
         list.pushHead(*it);
@@ -61,9 +61,9 @@ TEST(SinglyLinkedList, List_PopHead)
 
 TEST(SinglyLinkedList, List_Clear)
 {
-    SinglyLinkedList<Elem> list;
+    SinglyLinkedList<SElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<SElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
         list.pushHead(elem);
@@ -77,9 +77,9 @@ TEST(SinglyLinkedList, List_Clear)
 
 TEST(SinglyLinkedList, List_Traveral)
 {
-    SinglyLinkedList<Elem> list;
+    SinglyLinkedList<SElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<SElem, 5> elems = ELEM_VALUES;
 
     for(auto it = std::rbegin(elems); it != std::rend(elems); ++it)
         list.pushHead(*it);

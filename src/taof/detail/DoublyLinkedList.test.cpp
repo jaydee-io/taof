@@ -5,26 +5,26 @@
 
 using namespace taof::detail;
 
-struct Elem : public DoublyLinkedNode
+struct DElem : public DoublyLinkedNode
 {
-    Elem(int data) : data(data) {}
+    DElem(int data) : data(data) {}
 
-    constexpr auto operator <=>(const Elem &) const = default;
+    constexpr auto operator <=>(const DElem &) const = default;
 
     int data = 5;
 };
 
 TEST(DoublyLinkedList, Node_Construct)
 {
-    Elem elem = { 1 };
+    DElem elem = { 1 };
 
     ASSERT_FALSE(elem.isInList());
 }
 
 TEST(DoublyLinkedList, Node_Chained)
 {
-    Elem elem1 = { 1 };
-    Elem elem2 = { 2 };
+    DElem elem1 = { 1 };
+    DElem elem2 = { 2 };
 
     ASSERT_FALSE(elem1.isInList());
     ASSERT_FALSE(elem2.isInList());
@@ -37,12 +37,12 @@ TEST(DoublyLinkedList, Node_Chained)
 
 TEST(DoublyLinkedList, List_Construct)
 {
-    DoublyLinkedList<Elem> emptyList;
+    DoublyLinkedList<DElem> emptyList;
 
     ASSERT_TRUE(emptyList.isEmpty());
 
-    Elem elem = 10;
-    DoublyLinkedList<Elem> notEmptyList(elem);
+    DElem elem = 10;
+    DoublyLinkedList<DElem> notEmptyList(elem);
 
     ASSERT_FALSE(notEmptyList.isEmpty());
     ASSERT_EQ(notEmptyList.head().data, 10);
@@ -51,9 +51,9 @@ TEST(DoublyLinkedList, List_Construct)
 
 TEST(DoublyLinkedList, List_PushHead)
 {
-    DoublyLinkedList<Elem> list;
+    DoublyLinkedList<DElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<DElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
     {
@@ -68,9 +68,9 @@ TEST(DoublyLinkedList, List_PushHead)
 
 TEST(DoublyLinkedList, List_PushTail)
 {
-    DoublyLinkedList<Elem> list;
+    DoublyLinkedList<DElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<DElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
     {
@@ -85,9 +85,9 @@ TEST(DoublyLinkedList, List_PushTail)
 
 TEST(DoublyLinkedList, List_PopHead)
 {
-    DoublyLinkedList<Elem> list;
+    DoublyLinkedList<DElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<DElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
         list.pushTail(elem);
@@ -106,9 +106,9 @@ TEST(DoublyLinkedList, List_PopHead)
 
 TEST(DoublyLinkedList, List_PopTail)
 {
-    DoublyLinkedList<Elem> list;
+    DoublyLinkedList<DElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<DElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
         list.pushHead(elem);
@@ -127,9 +127,9 @@ TEST(DoublyLinkedList, List_PopTail)
 
 TEST(DoublyLinkedList, List_Clear)
 {
-    DoublyLinkedList<Elem> list;
+    DoublyLinkedList<DElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<DElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
         list.pushHead(elem);
@@ -146,9 +146,9 @@ TEST(DoublyLinkedList, List_Clear)
 
 TEST(DoublyLinkedList, List_Traveral)
 {
-    DoublyLinkedList<Elem> list;
+    DoublyLinkedList<DElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<DElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
         list.pushTail(elem);
@@ -160,9 +160,9 @@ TEST(DoublyLinkedList, List_Traveral)
 
 TEST(DoublyLinkedList, List_ReverseTraveral)
 {
-    DoublyLinkedList<Elem> list;
+    DoublyLinkedList<DElem> list;
     #define ELEM_VALUES { 1, 2, 3, 4, 5 };
-    std::array<Elem, 5> elems = ELEM_VALUES;
+    std::array<DElem, 5> elems = ELEM_VALUES;
 
     for(auto & elem : elems)
         list.pushTail(elem);

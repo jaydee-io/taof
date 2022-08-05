@@ -59,6 +59,34 @@ public:
         }
     }
 
+    void pushUrgent(Event * event)
+    {
+        ports::ScopedCriticalSection criticalSection(ports::CriticalSection::globalInstance());
+
+        event->incrementReferenceCount();               /* An event is referenced when it's added to a queue */
+
+        if(not isEmpty())                               /* Queue not empty => transfert optimized pointer to ring buffer */
+        {
+            // TODO : Assert (nFree != 0)
+            ++tail;
+            if(tail == end)                             /* Need to wrap the tail ? */
+                tail = 0;                               /* Wrap around */
+
+            ring[tail] = frontEvent;                    /* Push front event to the tail */
+
+            --nFree;                                    /* One less free event in the ring */
+
+            if(nMin > nFree)
+                nMin = nFree;                           /* Update statistics */
+        }
+        else
+        {
+            // TODO : Signal that the queue is not empty
+        }
+
+        frontEvent = event;                             /* Deliver event directly to the front of the queue */
+    }
+
     Event * pop(void)
     {
         ports::ScopedCriticalSection criticalSection(ports::CriticalSection::globalInstance());

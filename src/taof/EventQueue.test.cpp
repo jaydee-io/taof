@@ -6,16 +6,16 @@ using namespace taof;
 
 TEST(EventQueue, Construct)
 {
-    std::array<Event *, 3> eventBuffer;
-    EventQueue<3> queue(eventBuffer);
+    std::array<Event *, 6> eventBuffer;
+    EventQueue<6> queue(eventBuffer);
 
     ASSERT_TRUE(queue.isEmpty());
 }
 
 TEST(EventQueue, PopEmpty)
 {
-    std::array<Event *, 3> eventBuffer;
-    EventQueue<3> queue(eventBuffer);
+    std::array<Event *, 6> eventBuffer;
+    EventQueue<6> queue(eventBuffer);
 
     ASSERT_EQ(queue.pop(), nullptr);
     ASSERT_TRUE(queue.isEmpty());
@@ -26,8 +26,8 @@ TEST(EventQueue, PopEmpty)
 
 TEST(EventQueue, PushOneEvent)
 {
-    std::array<Event *, 3> eventBuffer;
-    EventQueue<3> queue(eventBuffer);
+    std::array<Event *, 6> eventBuffer;
+    EventQueue<6> queue(eventBuffer);
 
     Event event1;
     queue.push(&event1);
@@ -40,8 +40,8 @@ TEST(EventQueue, PushOneEvent)
 
 TEST(EventQueue, PushSeveralEvents)
 {
-    std::array<Event *, 3> eventBuffer;
-    EventQueue<3> queue(eventBuffer);
+    std::array<Event *, 6> eventBuffer;
+    EventQueue<6> queue(eventBuffer);
     Event * tmpEvent = nullptr;
 
     Event event1; queue.push(&event1); ASSERT_FALSE(queue.isEmpty());
@@ -59,8 +59,8 @@ TEST(EventQueue, CriticalSection)
 
     MockCriticalSection::setFailureOnUnexpectedCallMock();
 
-    std::array<Event *, 3> eventBuffer;
-    EventQueue<3> queue(eventBuffer);
+    std::array<Event *, 6> eventBuffer;
+    EventQueue<6> queue(eventBuffer);
 
     Event event1;
     EXPECT_CALL(MockCriticalSection::failureOnUnexpectedCallMock(), lock());
@@ -95,19 +95,37 @@ TEST(EventQueue, CriticalSection)
 
 TEST(EventQueue, PushUrgent)
 {
-    std::array<Event *, 5> eventBuffer;
-    EventQueue<5> queue(eventBuffer);
+    std::array<Event *, 6> eventBuffer;
+    EventQueue<6> queue(eventBuffer);
     Event * tmpEvent = nullptr;
 
+    Event eventUrgent1; queue.pushUrgent(&eventUrgent1);
     Event event1;       queue.push(&event1);
     Event event2;       queue.push(&event2);
-    Event eventUrgent1; queue.pushUrgent(&eventUrgent1);
-    Event event3;       queue.push(&event3);
     Event eventUrgent2; queue.pushUrgent(&eventUrgent2);
+    Event event3;       queue.push(&event3);
+    Event eventUrgent3; queue.pushUrgent(&eventUrgent3);
 
+    tmpEvent = queue.pop(); ASSERT_EQ(tmpEvent, &eventUrgent3);
     tmpEvent = queue.pop(); ASSERT_EQ(tmpEvent, &eventUrgent2);
     tmpEvent = queue.pop(); ASSERT_EQ(tmpEvent, &eventUrgent1);
     tmpEvent = queue.pop(); ASSERT_EQ(tmpEvent, &event1);
     tmpEvent = queue.pop(); ASSERT_EQ(tmpEvent, &event2);
     tmpEvent = queue.pop(); ASSERT_EQ(tmpEvent, &event3);
+}
+
+TEST(EventQueue, WrapAround)
+{
+    std::array<Event *, 6> eventBuffer;
+    EventQueue<6> queue(eventBuffer);
+    Event * tmpEvent = nullptr;
+
+    Event eventUrgent1;
+    for(auto i=0; i<eventBuffer.size(); i++)
+        queue.push(&eventUrgent1);
+    tmpEvent = queue.pop();
+
+    Event eventUrgent2; queue.pushUrgent(&eventUrgent2);
+    tmpEvent = queue.pop();
+    ASSERT_EQ(tmpEvent, &eventUrgent2);
 }
